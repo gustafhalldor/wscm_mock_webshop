@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
+  body
+    main.container.flex
+      div.backOrEmpty.col-md-4.flexRow.pull-right
+      block content
+        h1.breatheSmall Karfan þín:
+        div.listGaur
+          table.list.table
+        //- p Fylltu út eftirfarandi upplýsingar um áfangastað og pakka:
+        //- form(method='GET' action='/step2').breathe
+          label(for="country").rightMargin1em Land
+          select(name='country').countrySelection
+          br
+          label(for='postcode') Póstnúmer
+          input(type='text' name='postcode' value=101 placeholder=101).info.postnumer
+          br
+          label(for='weight') Þyngd(kg)
+          input(type='text' name='weight' value=0 placeholder=0).info.weight
+          br
+          label(for='height') Hæð(cm)
+          input(type='text' name='height' value=0 placeholder=0).info.height
+          br
+          label(for='width') Breidd(cm)
+          input(type='text' name='width' value=0 placeholder=0).info.width
+          br
+          label(for='length') Lengd(cm)
+          input(type='text' name='length' value=0 placeholder=0).info.length
+          br
+          input(type='radio' name="typeOfKey" value="active" checked).activeRadio
+          label Nota virkan lykil
+          br
+          input(type='radio' name="typeOfKey" value="inactive").inactiveRadio
+          label Nota óvirkan lykil
+          br
+          div.buttonHolder
+            button(type='submit').btn.btn-primary.formButton.text-uppercase Sjá afhendingarleiðir og verð
+        //
+        div.flexRow
+          a(href='/checkout').checkout.btn.btn-success.text-uppercase Fara í checkout
+
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+  script(src="javascripts/basket.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js")

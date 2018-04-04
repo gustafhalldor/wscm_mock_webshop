@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    main.container.flex
+      div.backOrEmpty.col-md-4.flexRow.pull-right
+      block content
+        h1= title
+        p Fylltu út eftirfarandi upplýsingar um áfangastað sendingar:
+        form
+          label(for='ssn') Kennitala sendanda
+          input(type='text' name='ssn').info.kennitala
+          br
+          input(type='radio' name='area' value='domestic' checked).domestic
+          label Innanlands
+          br
+          input(type='radio' name='area' value='export').export
+          label Til útlanda
+          br
+          label(for='address') Heimilisfang
+          input(type='text' name='address').info.heimilisfang
+          br
+          label(for='areaCode') Póstnúmer
+          input(type='text' name='areaCode').info.postnumer
+          br
+          div.buttonHolder
+            button.btn.btn-primary.formButton.text-uppercase Sjá afhendingarleiðir
+        div.deliveryList
+          table.listOfDeliveryMethods.table
+
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+  script(src="javascripts/checkout.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js")

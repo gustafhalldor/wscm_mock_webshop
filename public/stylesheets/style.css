@@ -1,0 +1,100 @@
+body {
+  padding: 25px;
+  font: 16px "Lato", Helvetica, Arial, sans-serif;
+}
+
+button {
+  text-decoration: none;
+}
+
+a {
+  /*color: #00B7FF;*/
+  text-decoration: none;
+  color: white;
+}
+
+li:last-child {
+  margin-bottom: 2em;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+  font-size: 1.25em;
+}
+
+.buttonHolder {
+  text-align: center;
+}
+
+.padding12px {
+  padding: 12px;
+}
+
+.padding8px {
+  padding: 8px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: space-around;
+}
+
+.images {
+  width: 20em;
+  height: 20em;
+}
+
+.breathe {
+  margin-bottom: 1.5em;
+}
+
+.breatheSmall {
+  margin-bottom: 1em;
+}
+
+.info {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+.deliveryList {
+  margin-top: 2em;
+}
+
+.samtals {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.rightMargin1em {
+  margin-right: 1em;
+}
+
+.displayKey {
+  margin-top: 2em;
+}
+
+.outline {
+  border: 1px solid black;
+}
+
+.locationList {
+  font-size: 1em;
+  margin: 0;
+}
+
+.locationInputs {
+  margin: 5px 0px;
+}

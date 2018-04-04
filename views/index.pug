@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
+  body
+    main.container.flex
+      block content
+        h1= title
+        p.breathe Hér má versla fullt af hlutum, en þó aðallega bara þessa þrjá:
+        div.main.container
+          div.row
+            div.col-md-4.flex
+              img(src="images/Bose_SoundTouch_10_h_talari_-_Svartur.jpg").images.breathe
+              p.bg-danger.padding8px 5000 KR
+              p.breathe Ótrúlegur hátalari!
+              button(name='speaker').btn.btn-success.speakerButton.text-uppercase Bæta við körfu
+            div.col-md-4.flex
+              img(src="images/Clatronic_heilsugrill_2000W_KG3571.jpg").images.breathe
+              p.bg-danger.padding8px 5000 KR
+              p.breathe Ótrúlegt grill!
+              button(name='grill').btn.btn-success.grillButton.text-uppercase Bæta við körfu
+            div.col-md-4.flex
+              img(src="images/Cobra_MT645VP_talst_-_2_stk.jpg").images.breathe
+              p.bg-danger.padding8px 5000 KR
+              p.breathe Ótrúlegar talstöðvar!
+              button(name='walkie').btn.btn-success.walkieButton.text-uppercase Bæta við körfu
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+  script(src="javascripts/index.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js")

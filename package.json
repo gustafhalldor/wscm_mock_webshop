@@ -1,0 +1,26 @@
+{
+  "name": "webshop-vefur",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "browser-sync": "^2.18.13",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "morgan": "~1.8.1",
+    "node-fetch": "^1.7.2",
+    "pug": "~2.0.0-beta11",
+    "request": "^2.83.0",
+    "require": "^2.4.20",
+    "serve-favicon": "~2.4.2",
+    "toastr": "^2.1.2"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "cors": "^2.8.4"
+  }
+}

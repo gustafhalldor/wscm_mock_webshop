@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    title= 'Store using our services'
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
+  body
+    main.container.flex
+      block content
+        h1= 'Vefverslun sem skrifar á móti okkur'
+        div.main.container
+          div.flexRow.breathe
+            div.col-md-6.flex
+              p= '1. Getur sótt stillingar vefverslunar í WSCM-service út frá API lykli, með því að senda lykilinn með í kallinu undir "x-api-key" í header. Sé sjálfur ekki alveg hvernig það gagnast þeim.'
+              button.btn.getSettingsButton Sækja stillingar
+            div.col-md-6
+              p.birtaStillingar
+          div.flexRow.breathe
+            div.col-md-6.flex
+              p= '2. Kallar í info-service með upplýsingum um stærð og þyngd pakka og afhendingarstað. Birtir svo viðskiptavini afhendingarmátana sem í boði eru. Hér ættum við væntanlega að vera með lógík í wscm apanum sem sér um að filtera út og birta afhendingarleiðir og verð út frá stillingum vefbúðarinnar.'
+              span= 'Land: Ísland'
+              span= 'Pnr: 101'
+              span= 'Þyngd: 2kg'
+              span= 'Hæð: 10cm'
+              span= 'Breidd: 10cm'
+              span= 'Lengd: 10cm'
+              button.btn.getDeliveryServicesButton Sjá afhendingarleiðir
+            div.col-md-6.flex
+              p.birtaAfhendingarleidir
+          div.flexRow.breathe
+            div.col-md-6.flex
+              p= '3. Viðskiptavinur velur afhendingarmáta og fær upp samtals verð fyrir vöruna + afhendingarmátann.'
+              h4= 'Pakki heim'
+              button.btn.getTotalPriceButton Velja
+            div.col-md-6.flex
+              p.birtaSamtalsVerd
+          div.flexRow.breathe
+            div.col-md-6
+              p= '4. Vefverslun býr til sendingu gegnum WSCM apann. Kemst upp með að pósta þessum minimal upplýsingum fyrir neðan. Við náum í upplýsingar um sendanda (eiganda vefverslunar) gegnum apann og fyllum þær sjálfkrafa út.'
+              code
+                span {
+                br
+                span "recipient": { 
+                br
+                span "name": "Gústi",
+                br
+                span "addressLine1": "Hagamelur 52", 
+                br
+                span "postcode": "107",
+                br
+                span "countryCode": "IS" },
+                br
+                span "options": {
+                br
+                span "deliveryServiceId": "DPO" }
+                br
+                span }
+            div.col-md-6.flex
+          div.flexRow
+            h3 Eitthvað fleira?
+              
+              
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+  script(src="javascripts/mock_store_calling_our_services.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js")
