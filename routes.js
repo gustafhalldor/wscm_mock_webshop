@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fetch = require('node-fetch');
+var axios = require('axios');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,59 +13,109 @@ router.get('/basket', function(req, res, next) {
   res.render('basket', { title: 'Basket case' });
 });
 
-router.get('/checkout', function(req, res, next) {
-  let url = `http://localhost:8989/wscm/v1/landing/`;
+router.post('/checkout', function(req, res, next) {
+//  let url = `http://localhost:8989/wscm/v1/landing/`;
 
-  var myHeaders = new fetch.Headers();
-  //myHeaders.set("Accept", "text/plain");
-  myHeaders.set("Content-Type", "application/json");
-  myHeaders.set("x-api-key", "4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E=");
+  // var myHeaders = new fetch.Headers();
+  // //myHeaders.set("Accept", "text/plain");
+  // myHeaders.set("Content-Type", "application/json");
+  // myHeaders.set("x-api-key", "4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E=");
+  //
+  // var myInit = {
+  //               'method': 'POST',
+  //               'body': JSON.stringify({
+  //                 'recipient': {
+  //                   'fullName': 'Gústi með geggjaðlangtnafn',
+  //                   'address': 'Hagamel',
+  //                   'postcode': 107,
+  //                   'email': "",
+  //                   'phone': ""
+  //                 },
+  //                 "products": [
+  //                   {
+  //                     "description": "Hátalari",
+  //                     "weight": 2,
+  //                     "price": 5000
+  //                   },
+  //                   {
+  //                     "description": "Talstöð(x2)",
+  //                     "weight": 0.5,
+  //                     "price": 5000
+  //                   }
+  //                 ]
+  //               }),
+  //               'headers': myHeaders,
+  //               'mode': 'cors',
+  //               'cache': 'default'
+  //             };
+  //
+  // let request = new fetch.Request(url, myInit)
+  //
+  // fetch(request)
+  // .then(response => {
+  //   return response.json();
+  // })
+  // .then(function(response) {
+  //   console.log(response.key);
+  //   // Láta þetta redirect-a yfir á React síðuna
+  //   const url = encodeURIComponent(response.key)
+  //   console.log(url);
+  //   res.redirect(`http://localhost:3000/${url}`);
+  // })
+  // .catch(function(error) {
+  //   console.log("fetch unsuccessful, error: ");
+  //   console.log(error);
+  // });
 
-  var myInit = {
-                'method': 'POST',
-                'body': JSON.stringify({
-                  'recipient': {
-                    'fullName': 'Gústi með geggjaðlangtnafn',
-                    'address': 'Hagamel',
-                    'postcode': 107,
-                    'email': "",
-                    'phone': ""
-                  },
-                  "products": [
-                    {
-                      "description": "Hátalari",
-                      "weight": 2,
-                      "price": 5000
-                    },
-                    {
-                      "description": "Talstöð(x2)",
-                      "weight": 0.5,
-                      "price": 5000
-                    }
-                  ]
-                }),
-                'headers': myHeaders,
-                'mode': 'cors',
-                'cache': 'default'
-              };
+  let mappedProducts = [];
+  for (var i = 0; i < req.body.length; i++) {
+    const product = req.body[i];
+    if (product.count > 0) {
+      mappedProducts.push({
+        description: product.name,
+        price: product.price,
+        weight: product.weight,
+        count: product.count,
+      })
+    }
+  }
+console.log("mappedProducts er:");
+  console.log(mappedProducts);
+console.log(req.body);
+  axios({
+      method: 'post',
+      url: `http://localhost:8989/wscm/v1/landing/`,
+      headers: {'x-api-key': '4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E='},
+      data: {
+        'recipient': {
+          'fullName': 'Gústi með geggjaðlangtnafn',
+          'address': 'Hagamel',
+          'postcode': 107,
+          'email': "",
+          'phone': ""
+        },
+        "products": mappedProducts
+      },
+    })
+      .then(response => {
+        const url = encodeURIComponent(response.data.key)
+        res.setHeader("Content-Type", "text/html")
+        let retStatus = 'Success';
+        res.send({
+          retStatus : retStatus,
+          redirectTo: `http://localhost:3000/${response.data.key}`,
+          msg : 'Just go there please' // this should help
+        });
+      })
+      .catch(error => {
+        // If no API key is found behind the redirect key, a "400" status is returned.
+        const obj = {
+          status: error.response.status,
+          message: error.response.data.message,
+        }
+        res.send(obj);
+      })
 
-  let request = new fetch.Request(url, myInit)
-
-  fetch(request)
-  .then(response => {
-    return response.json();
-  })
-  .then(function(response) {
-    console.log(response.key);
-    // Láta þetta redirect-a yfir á React síðuna
-    const url = encodeURIComponent(response.key)
-    console.log(url);
-    res.redirect(`http://localhost:3000/${url}`);
-  })
-  .catch(function(error) {
-    console.log("fetch unsuccessful, error: ");
-    console.log(error);
-  });
 });
 
 router.get('/step2', function(req, res, next) {

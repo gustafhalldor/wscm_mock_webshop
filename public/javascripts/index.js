@@ -84,19 +84,22 @@ var Webshop = (function() {
     let speakers = {
       'name': 'Hátalari',
       'count': speakerCount,
-      'price': speakerCount*5000
+      'price': 5000,
+      'weight': 2,
     }
 
     let grills = {
       'name': 'Grill',
       'count': grillCount,
-      'price': grillCount*5000
+      'price': 5000,
+      'weight': 3,
     }
 
     let walkies = {
       'name': 'Talstöð(x2)',
       'count': walkieCount,
-      'price': walkieCount*5000
+      'price': 2500,
+      'weight': 0.5,
     }
 
     let array;

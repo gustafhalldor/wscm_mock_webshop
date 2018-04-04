@@ -24,20 +24,41 @@ var Basket = (function() {
 
     let backOrEmpty = document.querySelector('.backOrEmpty');
 
-    // let checkoutButton = document.querySelector('.checkout');
-    // checkoutButton.addEventListener('click', function() {
-    //   handleCheckoutClick();
-    // });
+    let checkoutButton = document.querySelector('.checkout');
+    checkoutButton.addEventListener('click', function() {
+      handleCheckoutClick(data);
+    });
 
     createBackButton(backOrEmpty);
     createClearBasketButton(backOrEmpty);
-    // fillCountryList();
   }
 
-  // function handleCheckoutClick() {
-  //   console.log("smellti á takka");
-  //   window.location.href = "http://stackoverflow.com";
-  // }
+  function handleCheckoutClick(data) {
+    const url = `http://localhost:1337/checkout`;
+
+    const myHeaders = new Headers();
+    myHeaders.set('Content-Type', 'application/json');
+
+    const init = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    };
+
+    const request = new Request(url, init);
+
+    fetch(request)
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        window.location.replace(response.redirectTo)
+      })
+      .catch((error) => {
+        console.log('Tókst ekki að vista email viðskiptavinar.', error);
+      });
+  }
 
   function createClearBasketButton(backOrEmpty) {
     let clearBasket = document.createElement('a');
@@ -84,6 +105,7 @@ var Basket = (function() {
     list.appendChild(thead);
     list.appendChild(tbody);
 
+    let totalPrice = 0;
     for (var i = 0; i < data.length; i++) {
       let item = data[i];
       if (item.count > 0) {
@@ -94,7 +116,8 @@ var Basket = (function() {
 
         td1.innerHTML = item.name;
         td2.innerHTML = item.count;
-        td3.innerHTML = item.price;
+        td3.innerHTML = item.price*item.count;
+        totalPrice += item.price*item.count;
 
         bodyRow.appendChild(td1);
         bodyRow.appendChild(td2);
@@ -106,52 +129,14 @@ var Basket = (function() {
 
     let total = document.createElement('p');
     total.classList.add('samtals');
-    let totaltext = document.createTextNode(`Samtals: ${data[0].price + data[1].price + data[2].price} kr.`)
+
+
+    let totaltext = document.createTextNode(`Samtals: ${totalPrice} kr.`)
     total.appendChild(totaltext);
 
     let listGaur = document.querySelector('.listGaur');
     listGaur.appendChild(total);
   }
-
-  // function fillCountryList() {
-  //   let countrylist = document.querySelector('.countrySelection');
-  //   let ice =document.createElement('option');
-  //   ice.setAttribute('label', 'Ísland');
-  //   ice.setAttribute('value', 'IS');
-  //   countrylist.appendChild(ice);
-  //
-  //   let url = `http://test-ws.epost.is:8989/wscm/countries?language=en`;
-  //
-  //   var myHeaders = new Headers({
-  //     "x-api-key": "4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E="
-  //   });
-  //
-  //   var myInit = {
-  //               'method': 'GET',
-  //               'headers': myHeaders,
-  //               'mode': 'cors',
-  //               'cache': 'default'
-  //             };
-  //
-  //   let request = new Request(url, myInit);
-  //
-  //   fetch(request)
-  //     .then(function(res) {
-  //       return res.json();
-  //     }).then(function(data) {
-  //       for (var i = 0; i < data.countries.length; i++) {
-  //         if (data.countries[i].countryCode === 'IS') {
-  //           continue;
-  //         }
-  //         let item = data.countries[i];
-  //
-  //         let option = document.createElement('option');
-  //         option.setAttribute('label', item.nameShort);
-  //         option.setAttribute('value', item.countryCode);
-  //         countrylist.appendChild(option);
-  //       }
-  //     });
-  // }
 
   /**
    * @param {string} key Lykill sem við notum í localStorage
