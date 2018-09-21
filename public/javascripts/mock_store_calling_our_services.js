@@ -16,7 +16,7 @@ var Webshop = (function() {
     let getDeliveryServicesButton = document.querySelector('.getDeliveryServicesButton');
     let getTotalPriceButton = document.querySelector('.getTotalPriceButton');
 
-    getWebshopSettingsButton.addEventListener('click', onGetWebshopSettingsButtonClick);
+  //  getWebshopSettingsButton.addEventListener('click', onGetWebshopSettingsButtonClick);
     getDeliveryServicesButton.addEventListener('click', onGetDeliveryServicesButtonClick);
     getTotalPriceButton.addEventListener('click', onGetTotalPriceButtonClick);
   }
@@ -26,7 +26,7 @@ var Webshop = (function() {
 
     let displaySettings = document.querySelector('.birtaStillingar');
 
-    let url = `http://test-ws.epost.is:8989/wscm/webshop`;
+    let url = `http://test-ws.epost.is:8989/wscm/v1/webshop`;
 
     var myHeaders = new Headers({
       "x-api-key": "4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E="
@@ -56,7 +56,7 @@ var Webshop = (function() {
 
     let showDeliveryMethodsAndPrices = document.querySelector('.birtaAfhendingarleidir');
 
-    let url = `http://test-ws.epost.is:8967/info/deliveryprices?Language=is&countryCode=IS&postCode=101&weight=2&length=10&width=10&height=10`;
+    let url = `http://test-ws.epost.is:8989/wscm/v1/deliveryservicesandprices?Language=is&countryCode=IS&postCode=101&weight=2&length=10&width=10&height=10`;
 
     var myHeaders = new Headers({
       "x-api-key": "4F/UEh52hA86NWTQyM6+ogYGEsOClgD19jfrwl4Ol2E="
@@ -76,11 +76,11 @@ var Webshop = (function() {
       return response.json();
     }).then(function(response) {
       console.log(response);
-      for (let i in response.deliveryPrices) {
+      for (let i in response.deliveryServicesAndPrices) {
         let div = document.createElement('div');
         let span = document.createElement('span');
-        span.innerHTML = response.deliveryPrices[i].nameLong;
-        span.append(" - "+response.deliveryPrices[i].deliveryServiceId+" - "+response.deliveryPrices[i].priceRelated.bruttoPrice + " kr.")
+        span.innerHTML = response.deliveryServicesAndPrices[i].nameLong;
+        span.append(" - "+response.deliveryServicesAndPrices[i].deliveryServiceId+" - "+response.deliveryServicesAndPrices[i].priceRelated.bruttoPrice + " kr.")
         div.appendChild(span);
         showDeliveryMethodsAndPrices.appendChild(div);
       }

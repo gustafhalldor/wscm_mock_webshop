@@ -5,7 +5,7 @@ var axios = require('axios');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Vefverslun G-Sus' });
+  res.render('index', { title: 'Test-vefverslun Póstsins' });
 });
 
 /* GET basket contents. */
@@ -73,7 +73,7 @@ router.post('/checkout', function(req, res, next) {
     if (product.count > 0) {
       mappedProducts.push({
         description: product.name,
-        price: product.price,
+        pricePerItem: product.price,
         weight: product.weight,
         count: product.count,
       })
@@ -81,6 +81,7 @@ router.post('/checkout', function(req, res, next) {
   }
 console.log("mappedProducts er:");
   console.log(mappedProducts);
+console.log("req.body er");
 console.log(req.body);
   axios({
       method: 'post',
@@ -98,8 +99,9 @@ console.log(req.body);
       },
     })
       .then(response => {
-        const url = encodeURIComponent(response.data.key)
-        res.setHeader("Content-Type", "text/html")
+        console.log(response)
+        const url = encodeURIComponent(response.data.key);
+        res.setHeader("Content-Type", "text/html");
         let retStatus = 'Success';
         res.send({
           retStatus : retStatus,
@@ -112,7 +114,7 @@ console.log(req.body);
         const obj = {
           status: error.response.status,
           message: error.response.data.message,
-        }
+        };
         res.send(obj);
       })
 
